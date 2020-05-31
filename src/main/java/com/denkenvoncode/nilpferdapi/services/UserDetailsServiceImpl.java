@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import com.denkenvoncode.nilpferdapi.domain.Usuario;
 import com.denkenvoncode.nilpferdapi.repositories.UsuarioRepository;
-import com.denkenvoncode.nilpferdapi.security.UsuarioLoginAuthenticated;
+import com.denkenvoncode.nilpferdapi.security.UsuarioLogin;
 
-public class UsuarioLoginServiceImpl implements UserDetailsService {
+@Service
+public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
 	private UsuarioRepository repository;
@@ -20,6 +22,6 @@ public class UsuarioLoginServiceImpl implements UserDetailsService {
 		if (usuario == null) {
 			throw new UsernameNotFoundException(email);
 		}
-		return new UsuarioLoginAuthenticated(usuario.getId(), usuario.getEmail(), usuario.getSenha(), usuario.getPerfis());
+		return new UsuarioLogin(usuario.getId(), usuario.getEmail(), usuario.getSenha(), usuario.getPerfis());
 	}
 }

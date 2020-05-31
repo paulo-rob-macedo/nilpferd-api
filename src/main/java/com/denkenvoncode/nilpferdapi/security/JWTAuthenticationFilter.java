@@ -55,7 +55,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             FilterChain chain,
                                             Authentication auth) throws IOException, ServletException {
 	
-		String username = ((UsuarioLoginAuthenticated) auth.getPrincipal()).getUsername();
+		String username = ((UsuarioLogin) auth.getPrincipal()).getUsername();
         String token = jwtUtils.generateToken(username);
         res.addHeader("Authorization", "Bearer " + token);
         res.addHeader("access-control-expose-headers", "Authorization");

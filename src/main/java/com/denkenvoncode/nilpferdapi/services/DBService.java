@@ -3,6 +3,7 @@ package com.denkenvoncode.nilpferdapi.services;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.denkenvoncode.nilpferdapi.domain.Cliente;
@@ -37,23 +38,26 @@ public class DBService {
 	@Autowired
 	private ClienteRepository clienteRepository;
 	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;	
+	
 	public void StagingInitialize() {
 		
 		Usuario usuario1=new Usuario("Administrador", "Admin", "admin@nilpferd.com", UsuarioStatusEnum.Ativo);
-		usuario1.setSenha("123456");
+		usuario1.setSenha(passwordEncoder.encode("123456"));
 		usuario1.addPerfil(UsuarioPerfilEnum.Admin);
 		Usuario usuario2=new Usuario("Gerente", "Gerente", "gerente@nilpferd.com",UsuarioStatusEnum.Ativo);
-		usuario2.setSenha("234567");
+		usuario2.setSenha(passwordEncoder.encode("234567"));
 		usuario1.addPerfil(UsuarioPerfilEnum.Gerente);
 		Usuario usuario3=new Usuario("Fiscal", "Fiscal", "fiscal@nilpferd.com",UsuarioStatusEnum.Ativo);
-		usuario3.setSenha("345678");
+		usuario3.setSenha(passwordEncoder.encode("345678"));
 		usuario1.addPerfil(UsuarioPerfilEnum.Fiscal);
 		Usuario usuario4=new Usuario("Operador", "Operador", "operador@nilpferd.com",UsuarioStatusEnum.Ativo);
-		usuario4.setSenha("456789");
+		usuario4.setSenha(passwordEncoder.encode("456789"));
 		Usuario usuario5=new Usuario("Cozinha", "Cozinha", "cozinha@nilpferd.com",UsuarioStatusEnum.Ativo);
-		usuario5.setSenha("567890");
+		usuario5.setSenha(passwordEncoder.encode("567890"));
 		Usuario usuario6=new Usuario("Entregador", "Entregador", "entregrador@nilpferd.com",UsuarioStatusEnum.Ativo);
-		usuario6.setSenha("678901");
+		usuario6.setSenha(passwordEncoder.encode("678901"));
 		usuarioRepository.saveAll(Arrays.asList(usuario1,usuario2,usuario3,usuario4,usuario5,usuario6));
 		
 		Unid unid1=new Unid("Unidade", "UN", 0);

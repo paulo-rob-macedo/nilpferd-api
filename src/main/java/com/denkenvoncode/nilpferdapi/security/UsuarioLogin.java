@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @NoArgsConstructor
-public class UsuarioLoginAuthenticated implements UserDetails {
+public class UsuarioLogin implements UserDetails {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -25,7 +25,7 @@ public class UsuarioLoginAuthenticated implements UserDetails {
 	private Collection<? extends GrantedAuthority> authorities;
 	
 	
-	public UsuarioLoginAuthenticated(Long id, String email, String senha, Set<UsuarioPerfilEnum> perfis) {
+	public UsuarioLogin(Long id, String email, String senha, Set<UsuarioPerfilEnum> perfis) {
 		super();
 		this.id = id;
 		this.email = email;
