@@ -12,6 +12,7 @@ import lombok.Setter;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class UnidDTO implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 
 	@EqualsAndHashCode.Include()

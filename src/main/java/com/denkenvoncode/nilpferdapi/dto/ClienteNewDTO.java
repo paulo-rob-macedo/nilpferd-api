@@ -69,4 +69,7 @@ public class ClienteNewDTO implements Serializable {
 	@Setter
 	private String cep;
 	
+	@Getter
+	@Setter
+	private String fone;
 }
