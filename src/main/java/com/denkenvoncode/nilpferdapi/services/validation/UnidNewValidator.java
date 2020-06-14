@@ -41,6 +41,8 @@ public class UnidNewValidator implements ConstraintValidator<UnidNew, UnidNewDTO
 		if (unid != null) {
 			list.add(new FieldMessage("sigla", "A sigla informada ja foi cadastrada em outra Unidade!"));
 		}
+		
+		
 		for (FieldMessage e : list) {
 			context.disableDefaultConstraintViolation();
 			context.buildConstraintViolationWithTemplate(e.getMessage()).addPropertyNode(e.getFieldName())

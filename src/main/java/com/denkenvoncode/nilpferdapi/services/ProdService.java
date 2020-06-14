@@ -55,12 +55,6 @@ public class ProdService {
 	@Transactional
 	public Prod insert(Prod prod) {
 		prod.setId(null);
-		if (prod.getUnidvenda()==null) {
-			throw new DataIntegrityException("Informe a Unidade de Venda do Produto!");
-		}
-		if (prod.getUnidcompra()==null) {
-			throw new DataIntegrityException("Informe a Unidade de Compra do Produto!");
-		}
 		prod = repository.save(prod);
 		return prod;
 	}
@@ -89,7 +83,7 @@ public class ProdService {
 	public Prod FromDTO(ProdUpdDTO dto) {
 		Unid unidVenda=unidService.findbyId(dto.getUnidvendaid());
 		Unid unidCompra=unidService.findbyId(dto.getUnidcompraid());
-		Prod prod=new Prod(dto.getDescr(),dto.getPrecovenda(),dto.getPrecocompra(),unidVenda,unidCompra,ProdStatusEnum.Ativo);
+		Prod prod=new Prod(dto.getDescr(),dto.getPrecovenda(),dto.getPrecocompra(),unidVenda,unidCompra,ProdStatusEnum.toEnum(dto.getStatusid()));
 		return prod;		
 	}
 }

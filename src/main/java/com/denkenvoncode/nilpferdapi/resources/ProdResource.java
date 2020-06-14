@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,9 +41,10 @@ public class ProdResource {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<Prod> find(@PathVariable Long id) {
+	public ResponseEntity<ProdDTO> find(@PathVariable Long id) {
 		Prod prod = service.findbyId(id);
-		return ResponseEntity.ok().body(prod);
+		ProdDTO dto=new ProdDTO(prod);
+		return ResponseEntity.ok().body(dto);
 	}	
 	
 	@RequestMapping(value="/page", method=RequestMethod.GET)
@@ -56,6 +58,7 @@ public class ProdResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMINISTRADOR')")
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody ProdNewDTO dto){
 		Prod prod=service.FromDTO(dto);
@@ -65,6 +68,7 @@ public class ProdResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMINISTRADOR')")
 	@RequestMapping(value="/{id}",method=RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody ProdUpdDTO dto, @PathVariable Long id){
 		Prod prod=service.FromDTO(dto);
@@ -73,6 +77,7 @@ public class ProdResource {
 		return ResponseEntity.noContent().build();
 	}	
 	
+	@PreAuthorize("hasAnyRole('ADMINISTRADOR')")
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		service.delete(id);

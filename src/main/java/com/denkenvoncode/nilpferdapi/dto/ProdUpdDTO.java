@@ -2,20 +2,20 @@ package com.denkenvoncode.nilpferdapi.dto;
 
 import java.io.Serializable;
 
-import javax.validation.constraints.NotBlank;
+import com.denkenvoncode.nilpferdapi.services.validation.ProdUpdate;
 
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Data
+@ProdUpdate
 public class ProdUpdDTO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
 	@Getter
 	@Setter
-	@NotBlank(message = "Defina a descrição do produto!")
 	private String descr;
 	
 	@Getter
@@ -33,4 +33,8 @@ public class ProdUpdDTO implements Serializable {
 	@Getter
 	@Setter
 	private Long unidcompraid;	
+	
+	@Getter
+	@Setter
+	private Integer statusid;
 }

@@ -2,8 +2,6 @@ package com.denkenvoncode.nilpferdapi.dto;
 
 import java.io.Serializable;
 
-import javax.validation.constraints.NotBlank;
-
 import com.denkenvoncode.nilpferdapi.domain.Prod;
 
 import lombok.Data;
@@ -23,7 +21,6 @@ public class ProdDTO implements Serializable {
 	
 	@Getter
 	@Setter
-	@NotBlank(message = "Defina a descrição do produto!")
 	private String descr;
 	
 	@Getter
@@ -35,19 +32,24 @@ public class ProdDTO implements Serializable {
 	private Double precocompra;
 	
 	@Getter
-	@Setter	
-	private String unidvendasigla;
-	
+	@Setter
+	private ProdStatusDTO status;
+
 	@Getter
 	@Setter
-	private String unidcomprasigla;
+	private UnidDTO unidvenda;
+
+	@Getter
+	@Setter	
+	private UnidDTO unidcompra;
 	
 	public ProdDTO(Prod prod) {
 		this.id=prod.getId();
 		this.descr=prod.getDescr();
 		this.precovenda=prod.getPrecovenda();
 		this.precocompra=prod.getPrecocompra();
-		this.unidvendasigla=prod.getUnidvenda().getSigla();
-		this.unidcomprasigla=prod.getUnidcompra().getSigla();
+		this.setStatus(new ProdStatusDTO(prod.getStatus().getCod(),prod.getStatus().getDescr()));
+		this.setUnidvenda(new UnidDTO(prod.getUnidvenda()));
+		this.setUnidcompra(new UnidDTO(prod.getUnidcompra()));;
 	}
 }
