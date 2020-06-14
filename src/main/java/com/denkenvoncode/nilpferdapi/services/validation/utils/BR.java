@@ -1,5 +1,8 @@
 package com.denkenvoncode.nilpferdapi.services.validation.utils;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class BR {
 
 	// Fonte: https://gist.github.com/adrianoluis/5043397d378ae506d87366abb0ab4e30
@@ -46,5 +49,18 @@ public class BR {
 	        final Integer digit1 = calculate(tin.substring(0, 12), weightTin);
 	        final Integer digit2 = calculate(tin.substring(0, 12) + digit1, weightTin);
 	        return tin.equals(tin.substring(0, 12) + digit1.toString() + digit2.toString());
+	    }
+	    
+	    public static boolean isValidEmailAddressRegex(String email) {
+	        boolean isEmailIdValid = false;
+	        if (email != null && email.length() > 0) {
+	            String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+	            Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+	            Matcher matcher = pattern.matcher(email);
+	            if (matcher.matches()) {
+	                isEmailIdValid = true;
+	            }
+	        }
+	        return isEmailIdValid;
 	    }
 }

@@ -32,21 +32,24 @@ public class ClienteUpdateValidator implements ConstraintValidator<ClienteUpdate
 	@Override
 	public boolean isValid(ClienteDTO dto, ConstraintValidatorContext context) {
 
+		List<FieldMessage> list = new ArrayList<>();
+
 		@SuppressWarnings("unchecked")
 		Map<String, String> map = (Map<String, String>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
 		Integer uriId = Integer.parseInt(map.get("id"));
 		
-		List<FieldMessage> list = new ArrayList<>();
 		
 		String numDoc=dto.getNumdoc().trim();
-		
+		if (numDoc.length()==0) {
+			list.add(new FieldMessage("numdoc", "Não foi informado o CPF ou CNPJ!"));
+		}
 		if ((numDoc.length()<=11) 
 			&& !BR.isValidCPF(numDoc)) {
-			list.add(new FieldMessage("numdoc", "CPF inválido"));
+			list.add(new FieldMessage("numdoc", "CPF inválido!"));
 		}
 		if ((numDoc.length()>11) 
 			&& !BR.isValidCNPJ(numDoc)) {
-					list.add(new FieldMessage("numdoc", "CNPJ inválido"));
+					list.add(new FieldMessage("numdoc", "CNPJ inválido!"));
 				}
 
 		Cliente clie=repository.findByEmail(dto.getEmail());

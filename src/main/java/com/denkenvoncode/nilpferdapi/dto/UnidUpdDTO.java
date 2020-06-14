@@ -4,17 +4,17 @@ import java.io.Serializable;
 
 import javax.validation.constraints.NotBlank;
 
-import com.denkenvoncode.nilpferdapi.services.validation.UnidNew;
+import com.denkenvoncode.nilpferdapi.services.validation.UnidUpdate;
 
-import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@UnidNew
-public class UnidNewDTO implements Serializable {
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@UnidUpdate
+public class UnidUpdDTO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -29,4 +29,5 @@ public class UnidNewDTO implements Serializable {
 	@Getter
 	@Setter
 	private Integer qtdec;
+		
 }

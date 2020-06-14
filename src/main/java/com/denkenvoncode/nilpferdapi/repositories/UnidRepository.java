@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.denkenvoncode.nilpferdapi.domain.Cliente;
 import com.denkenvoncode.nilpferdapi.domain.Unid;
 
 
@@ -18,4 +19,6 @@ public interface UnidRepository extends JpaRepository<Unid, Long>{
 	@Transactional(readOnly=true)
 	public List<Unid> findAll();
 
+	@Transactional(readOnly=true)
+	public Unid findBySigla(String sigla);
 }

@@ -2,9 +2,10 @@ package com.denkenvoncode.nilpferdapi.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotBlank;
+
 import com.denkenvoncode.nilpferdapi.domain.Prod;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -22,6 +23,7 @@ public class ProdDTO implements Serializable {
 	
 	@Getter
 	@Setter
+	@NotBlank(message = "Defina a descrição do produto!")
 	private String descr;
 	
 	@Getter

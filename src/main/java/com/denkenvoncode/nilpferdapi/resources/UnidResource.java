@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.denkenvoncode.nilpferdapi.domain.Unid;
 import com.denkenvoncode.nilpferdapi.dto.UnidDTO;
+import com.denkenvoncode.nilpferdapi.dto.UnidNewDTO;
+import com.denkenvoncode.nilpferdapi.dto.UnidUpdDTO;
 import com.denkenvoncode.nilpferdapi.services.UnidService;
 
 
@@ -42,8 +45,9 @@ public class UnidResource {
 		return ResponseEntity.ok().body(unid);
 	}	
 	
+	@PreAuthorize("hasAnyRole('ADMINISTRADOR')")
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody UnidDTO dto){
+	public ResponseEntity<Void> insert(@Valid @RequestBody UnidNewDTO dto){
 		Unid unid=service.fromDTO(dto);
 		unid=service.insert(unid);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
@@ -51,14 +55,16 @@ public class UnidResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMINISTRADOR')")
 	@RequestMapping(value="/{id}",method=RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody UnidDTO unidDto, @PathVariable Long id){
-		Unid unid=service.fromDTO(unidDto);
+	public ResponseEntity<Void> update(@Valid @RequestBody UnidUpdDTO dto, @PathVariable Long id){
+		Unid unid=service.fromDTO(dto);
 		unid.setId(id);
 		unid=service.update(unid);
 		return ResponseEntity.noContent().build();
 	}
 	
+	@PreAuthorize("hasAnyRole('ADMINISTRADOR')")
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		service.delete(id);

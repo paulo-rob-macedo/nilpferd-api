@@ -6,5 +6,5 @@ import com.denkenvoncode.nilpferdapi.domain.Comanda;
 
 public interface ComandaRepository extends JpaRepository<Comanda, Long>{
 
-
+	
 }

@@ -4,29 +4,33 @@ import java.io.Serializable;
 
 import javax.validation.constraints.NotBlank;
 
-import com.denkenvoncode.nilpferdapi.services.validation.UnidNew;
-
-import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@UnidNew
-public class UnidNewDTO implements Serializable {
+@Data
+public class ProdUpdDTO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
 	@Getter
 	@Setter
+	@NotBlank(message = "Defina a descrição do produto!")
 	private String descr;
 	
 	@Getter
 	@Setter
-	private String sigla;
-		
+	private Double precovenda;
+
 	@Getter
 	@Setter
-	private Integer qtdec;
+	private Double precocompra;	
+	
+	@Getter
+	@Setter	
+	private Long unidvendaid;
+	
+	@Getter
+	@Setter
+	private Long unidcompraid;	
 }

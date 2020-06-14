@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.denkenvoncode.nilpferdapi.domain.Unid;
 import com.denkenvoncode.nilpferdapi.dto.UnidDTO;
+import com.denkenvoncode.nilpferdapi.dto.UnidNewDTO;
+import com.denkenvoncode.nilpferdapi.dto.UnidUpdDTO;
 import com.denkenvoncode.nilpferdapi.repositories.UnidRepository;
 import com.denkenvoncode.nilpferdapi.services.exceptions.DataIntegrityException;
 import com.denkenvoncode.nilpferdapi.services.exceptions.ObjectNotFoundException;
@@ -64,6 +66,17 @@ public class UnidService {
 	public Unid fromDTO(UnidDTO dto) {
 		Unid unid=new Unid(dto.getDescr(), dto.getSigla(), dto.getQtdec());
 		unid.setId(dto.getId());
+		return unid;
+	}
+	
+	public Unid fromDTO(UnidNewDTO dto) {
+		Unid unid=new Unid(dto.getDescr(), dto.getSigla(), dto.getQtdec());
+		unid.setId(null);
+		return unid;
+	}
+	
+	public Unid fromDTO(UnidUpdDTO dto) {
+		Unid unid=new Unid(dto.getDescr(), dto.getSigla(), dto.getQtdec());
 		return unid;
 	}
 }

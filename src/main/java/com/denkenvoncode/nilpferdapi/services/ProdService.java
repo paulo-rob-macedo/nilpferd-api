@@ -15,6 +15,7 @@ import com.denkenvoncode.nilpferdapi.domain.Prod;
 import com.denkenvoncode.nilpferdapi.domain.Unid;
 import com.denkenvoncode.nilpferdapi.domain.enums.ProdStatusEnum;
 import com.denkenvoncode.nilpferdapi.dto.ProdNewDTO;
+import com.denkenvoncode.nilpferdapi.dto.ProdUpdDTO;
 import com.denkenvoncode.nilpferdapi.repositories.ProdRepository;
 import com.denkenvoncode.nilpferdapi.services.exceptions.DataIntegrityException;
 import com.denkenvoncode.nilpferdapi.services.exceptions.ObjectNotFoundException;
@@ -85,11 +86,10 @@ public class ProdService {
 		return prod;
 	}
 
-//	public Prod fromDTO(ProdNewDTO dto) {
-//		Unid unidVenda=unidRepository.findById(dto.getUnidvendaid()());
-//		Unid unidCompra=unidRepository.findById(dto.getUnidcompraid());
-//		Prod prod=new Prod(dto.getDescr(),dto.getPrecovenda(),dto.getPrecocompra(),unidVenda,UnidCompra,prod.getStatus());
-//		prod=service.insert(prod);
-//		return prod;
-//	}	
+	public Prod FromDTO(ProdUpdDTO dto) {
+		Unid unidVenda=unidService.findbyId(dto.getUnidvendaid());
+		Unid unidCompra=unidService.findbyId(dto.getUnidcompraid());
+		Prod prod=new Prod(dto.getDescr(),dto.getPrecovenda(),dto.getPrecocompra(),unidVenda,unidCompra,ProdStatusEnum.Ativo);
+		return prod;		
+	}
 }

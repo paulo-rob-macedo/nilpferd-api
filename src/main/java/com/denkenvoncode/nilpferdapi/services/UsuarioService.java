@@ -13,6 +13,7 @@ import com.denkenvoncode.nilpferdapi.domain.enums.UsuarioPerfilEnum;
 import com.denkenvoncode.nilpferdapi.domain.enums.UsuarioStatusEnum;
 import com.denkenvoncode.nilpferdapi.dto.UsuarioDTO;
 import com.denkenvoncode.nilpferdapi.dto.UsuarioNewDTO;
+import com.denkenvoncode.nilpferdapi.dto.UsuarioUpdDTO;
 import com.denkenvoncode.nilpferdapi.repositories.UsuarioRepository;
 import com.denkenvoncode.nilpferdapi.security.UsuarioLogin;
 import com.denkenvoncode.nilpferdapi.services.exceptions.AuthorizationException;
@@ -102,4 +103,11 @@ public class UsuarioService {
 		return usuario;
 	}
 
+	public Usuario fromDTO(UsuarioUpdDTO dto) {
+		Usuario usuario=new Usuario(dto.getNome(), dto.getApelido(), dto.getEmail(),
+				UsuarioStatusEnum.toEnum(dto.getStatusid()));
+		usuario.setSenha(dto.getSenha());
+		return usuario;
+	}
+	
 }

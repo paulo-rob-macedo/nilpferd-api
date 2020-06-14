@@ -22,21 +22,14 @@ public class ClienteNewDTO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
-	@NotBlank(message = "Defina o nome do cliente!")
-	@Size(min=1, max=100,message="Nome deve ter {min} a {max} caracteres!")
 	@Getter
 	@Setter
 	private String nome;
 	
-	@NotBlank(message = "Defina o email do cliente!")
-	@Size(min=1, max=200,message="Email deve ter {min} a {max} caracteres!")
-	@Email(message = "Informe o email corretamente!")
 	@Getter
 	@Setter
 	private String email;
 	
-	@NotBlank(message = "Defina o numero do documento")
-	@Size(min=1, max=14,message="numero do documento deve ter {min} a {max} caracteres!")
 	@Getter
 	@Setter
 	private String numdoc;

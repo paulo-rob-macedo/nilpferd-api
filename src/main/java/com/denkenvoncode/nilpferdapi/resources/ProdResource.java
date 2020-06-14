@@ -18,10 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.denkenvoncode.nilpferdapi.domain.Prod;
-import com.denkenvoncode.nilpferdapi.domain.Unid;
 import com.denkenvoncode.nilpferdapi.dto.ProdDTO;
 import com.denkenvoncode.nilpferdapi.dto.ProdNewDTO;
-import com.denkenvoncode.nilpferdapi.dto.UnidDTO;
+import com.denkenvoncode.nilpferdapi.dto.ProdUpdDTO;
 import com.denkenvoncode.nilpferdapi.services.ProdService;
 
 
@@ -65,6 +64,14 @@ public class ProdResource {
 				.path("/{id}").buildAndExpand(prod.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
+	
+	@RequestMapping(value="/{id}",method=RequestMethod.PUT)
+	public ResponseEntity<Void> update(@Valid @RequestBody ProdUpdDTO dto, @PathVariable Long id){
+		Prod prod=service.FromDTO(dto);
+		prod.setId(id);
+		prod=service.update(prod);
+		return ResponseEntity.noContent().build();
+	}	
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
