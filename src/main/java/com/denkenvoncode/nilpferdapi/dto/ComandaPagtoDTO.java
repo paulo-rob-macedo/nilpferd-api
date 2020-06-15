@@ -2,9 +2,6 @@ package com.denkenvoncode.nilpferdapi.dto;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -12,34 +9,37 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Data
-public class ComandaNewDTO implements Serializable {
-
+public class ComandaPagtoDTO implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 
 	@Getter
 	@Setter
 	@EqualsAndHashCode.Include()
 	private Long id;
-
+	
 	@Getter
 	@Setter
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-	private Date dtabertura;
-
+	private Long comandaid;
+	
 	@Getter
 	@Setter
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-	private Date dtfechamento;
-
+	private Date dtpagto;
+	
 	@Getter
 	@Setter
-	private Long usuarioid;
-
+	private Double pagtovl;
+	
 	@Getter
 	@Setter
-	private Integer statusid;
-
+	private Integer qtdparcela;
+	
 	@Getter
 	@Setter
-	private List<ComandaITDTO> itens;
+	private ComandaPagtoTipoDTO tipo;
+	
+	@Getter
+	@Setter
+	private ComandaPagtoStatusDTO status;
+	
 }

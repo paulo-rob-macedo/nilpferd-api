@@ -11,26 +11,27 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-@Data
-public class ComandaNewDTO implements Serializable {
 
+@Data
+public class ComandaUpdDTO implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 
 	@Getter
 	@Setter
 	@EqualsAndHashCode.Include()
 	private Long id;
-
+	
 	@Getter
 	@Setter
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date dtabertura;
-
+	
 	@Getter
 	@Setter
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date dtfechamento;
-
+	
 	@Getter
 	@Setter
 	private Long usuarioid;
@@ -38,8 +39,8 @@ public class ComandaNewDTO implements Serializable {
 	@Getter
 	@Setter
 	private Integer statusid;
-
+	
 	@Getter
 	@Setter
-	private List<ComandaITDTO> itens;
+	private List<ComandaITDTO> itens;	
 }
