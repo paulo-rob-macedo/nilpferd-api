@@ -14,6 +14,7 @@ import javax.persistence.Table;
 
 import com.denkenvoncode.nilpferdapi.domain.enums.ComandaPagtoTipoEnum;
 import com.denkenvoncode.nilpferdapi.domain.enums.ComandoPagtoStatusEnum;
+import com.denkenvoncode.nilpferdapi.dto.ComandaPagtoDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.EqualsAndHashCode;
@@ -82,4 +83,14 @@ public class ComandaPagto implements Serializable{
 	@NonNull
 	private ComandoPagtoStatusEnum status;
 	
+	public ComandaPagto(ComandaPagtoDTO dto) {
+		this.id=dto.getId();
+		this.comanda.setId(dto.getComandaid());
+		this.dtpagto=dto.getDtpagto();
+		this.recebidovl=dto.getRecebidovl();
+		this.pagtovl=dto.getPagtovl();
+		this.qtdparcela=dto.getQtdparcela();
+		this.tipo=ComandaPagtoTipoEnum.toEnum(dto.getTipo().getId());
+		this.status=ComandoPagtoStatusEnum.toEnum(dto.getStatus().getId());
+	}
 }

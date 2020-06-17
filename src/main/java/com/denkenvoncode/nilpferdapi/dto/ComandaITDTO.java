@@ -62,4 +62,5 @@ public class ComandaITDTO implements Serializable {
 		this.status.setDescr(comandaIT.getStatus().getDescr());
 
 	}
+	
 }

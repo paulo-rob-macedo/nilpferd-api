@@ -17,11 +17,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
-import com.denkenvoncode.nilpferdapi.domain.enums.ClienteStatusEnum;
 import com.denkenvoncode.nilpferdapi.domain.enums.ComandaStatusEnum;
+import com.denkenvoncode.nilpferdapi.dto.ComandaNewDTO;
+import com.denkenvoncode.nilpferdapi.dto.ComandaUpdDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -50,7 +50,6 @@ public class Comanda implements Serializable {
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	@Getter
 	@Setter
-	@NonNull
 	private Date dtabertura;
 	
 	@Column(name="dtfechamento")
@@ -84,4 +83,19 @@ public class Comanda implements Serializable {
 	@Setter
 	private List<ComandaPagto> pagtos = new ArrayList<>();
 	
+	public Comanda(ComandaNewDTO dto) {
+//		Usuario usuario=new Usuario();
+//		usuario.setId(id);
+//		usuario.setId(dto.getUsuarioid());
+		this.dtabertura=dto.getDtabertura();
+		this.status=ComandaStatusEnum.Ativo;
+//		this.usuario=usuario;
+	}
+	
+	public Comanda(ComandaUpdDTO dto) {
+		this.dtabertura=dto.getDtabertura();
+		this.status=ComandaStatusEnum.toEnum(dto.getStatusid());
+		//this.usuario.setId(dto.getUsuarioid());
+	}
+
 }

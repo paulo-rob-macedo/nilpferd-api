@@ -1,8 +1,10 @@
 package com.denkenvoncode.nilpferdapi.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.denkenvoncode.nilpferdapi.domain.Comanda;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -58,6 +60,9 @@ public class ComandaDTO implements Serializable {
 		this.usuario.setNome(comanda.getUsuario().getNome());
 		this.status.setId(comanda.getStatus().getCod());
 		this.status.setDescr(comanda.getStatus().getDescr());
+		
+		this.itens.addAll(comanda.getItens().stream().map(obj -> new ComandaITDTO(obj)).collect(Collectors.toList()));
+		this.pags.addAll(comanda.getPagtos().stream().map(obj -> new ComandaPagtoDTO(obj)).collect(Collectors.toList()));
 		
 	}
 	

@@ -42,5 +42,5 @@ public class ComandaUpdDTO implements Serializable {
 	
 	@Getter
 	@Setter
-	private List<ComandaITDTO> itens;	
+	private List<ComandaITUpdDTO> itens;	
 }
