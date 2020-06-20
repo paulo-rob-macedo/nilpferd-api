@@ -17,14 +17,14 @@ public class ComandaITPK implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@ManyToOne
-	@JoinColumn(name = "comandaid")
+	@JoinColumn(name = "comandaid",referencedColumnName = "id")
 	@Getter
 	@Setter
 	@EqualsAndHashCode.Include()
 	private Comanda comanda;
 	
 	@ManyToOne
-	@JoinColumn(name = "prodid")
+	@JoinColumn(name = "prodid",referencedColumnName = "id")
 	@Getter
 	@Setter
 	@EqualsAndHashCode.Include()

@@ -35,6 +35,8 @@ public class ComandaResource {
 	@RequestMapping(method=RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody ComandaNewDTO dto){
 		Comanda comanda=service.FromDTO(dto);
+		comanda.getDescontovl();
+		comanda.getTotalvl();
 		comanda=service.insert(comanda);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 				.path("/{id}").buildAndExpand(comanda.getId()).toUri();

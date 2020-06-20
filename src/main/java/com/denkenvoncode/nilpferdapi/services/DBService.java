@@ -1,24 +1,34 @@
 package com.denkenvoncode.nilpferdapi.services;
 
 import java.util.Arrays;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.denkenvoncode.nilpferdapi.domain.Cliente;
+import com.denkenvoncode.nilpferdapi.domain.Comanda;
+import com.denkenvoncode.nilpferdapi.domain.ComandaIT;
+import com.denkenvoncode.nilpferdapi.domain.ComandaPagto;
 import com.denkenvoncode.nilpferdapi.domain.Endereco;
 import com.denkenvoncode.nilpferdapi.domain.Fone;
 import com.denkenvoncode.nilpferdapi.domain.Prod;
 import com.denkenvoncode.nilpferdapi.domain.Unid;
 import com.denkenvoncode.nilpferdapi.domain.Usuario;
 import com.denkenvoncode.nilpferdapi.domain.enums.ClienteStatusEnum;
+import com.denkenvoncode.nilpferdapi.domain.enums.ComandaITStatusEnum;
+import com.denkenvoncode.nilpferdapi.domain.enums.ComandaPagtoTipoEnum;
+import com.denkenvoncode.nilpferdapi.domain.enums.ComandaStatusEnum;
+import com.denkenvoncode.nilpferdapi.domain.enums.ComandoPagtoStatusEnum;
 import com.denkenvoncode.nilpferdapi.domain.enums.EnderecoStatusEnum;
 import com.denkenvoncode.nilpferdapi.domain.enums.FoneStatusEnum;
 import com.denkenvoncode.nilpferdapi.domain.enums.ProdStatusEnum;
 import com.denkenvoncode.nilpferdapi.domain.enums.UsuarioPerfilEnum;
 import com.denkenvoncode.nilpferdapi.domain.enums.UsuarioStatusEnum;
 import com.denkenvoncode.nilpferdapi.repositories.ClienteRepository;
+import com.denkenvoncode.nilpferdapi.repositories.ComandaITRepository;
+import com.denkenvoncode.nilpferdapi.repositories.ComandaRepository;
 import com.denkenvoncode.nilpferdapi.repositories.ProdRepository;
 import com.denkenvoncode.nilpferdapi.repositories.UnidRepository;
 import com.denkenvoncode.nilpferdapi.repositories.UsuarioRepository;
@@ -37,6 +47,12 @@ public class DBService {
 	
 	@Autowired
 	private ClienteRepository clienteRepository;
+	
+	@Autowired
+	private ComandaRepository comandaRepository;
+	
+	@Autowired
+	private ComandaITRepository comandaITRepository;
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;	
@@ -106,6 +122,25 @@ public class DBService {
 		cliente4.getFones().add(fone4);
 		
 		clienteRepository.saveAll(Arrays.asList(cliente1,cliente2,cliente3,cliente4));
+		
+		Comanda comanda1=new Comanda(new Date(),0.0,0.0,ComandaStatusEnum.Ativo,usuario1);
+		ComandaIT item1=new ComandaIT(comanda1,1,prod1,2.0,0.0,ComandaITStatusEnum.Ativo);
+		ComandaIT item2=new ComandaIT(comanda1,2,prod2,3.0,0.0,ComandaITStatusEnum.Ativo);
+		ComandaIT item3=new ComandaIT(comanda1,3,prod3,1.0,0.0,ComandaITStatusEnum.Ativo);
+		ComandaIT item4=new ComandaIT(comanda1,4,prod4,2.0,0.0,ComandaITStatusEnum.Ativo);
+		comanda1.getItens().add(item1);
+		comanda1.getItens().add(item2);
+		comanda1.getItens().add(item3);
+		comanda1.getItens().add(item4);
+		comanda1.getDescontovl();
+		comanda1.getTotalvl();
+		
+		ComandaPagto comandaPagto1=new ComandaPagto(comanda1,new Date(),40.0,40.0,1,ComandaPagtoTipoEnum.Debito,ComandoPagtoStatusEnum.Ativo);
+		comanda1.getPagtos().add(comandaPagto1);
+		
+		comandaRepository.save(comanda1);
+		
+		//comandaITRepository.saveAll(comanda1.getItens());
 		
 	}
 	

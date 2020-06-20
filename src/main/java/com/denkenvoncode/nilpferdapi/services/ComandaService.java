@@ -57,7 +57,7 @@ public class ComandaService {
 		Optional<Usuario> usuario=usuarioRepository.findById(dto.getUsuarioid());
 		Comanda comanda=new Comanda(dto);
 		comanda.setUsuario(usuario.get());
-		comanda.getItens().addAll(dto.getItens().stream().map(obj -> new ComandaIT(obj)).collect(Collectors.toList()));
+		comanda.getItens().addAll(dto.getItens().stream().map(obj -> new ComandaIT(obj,comanda)).collect(Collectors.toList()));
 		return comanda;
 	}
 	

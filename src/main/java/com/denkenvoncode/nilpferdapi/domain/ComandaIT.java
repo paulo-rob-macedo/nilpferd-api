@@ -15,6 +15,7 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 
 @Entity
@@ -51,8 +52,7 @@ public class ComandaIT implements Serializable {
 	private Double desconto;	
 
 	@Column(name="totalvl")
-	@Getter
-	@Setter
+	@NonNull
 	private Double totalvl;	
 	
 	@Column(name="status")
@@ -60,32 +60,36 @@ public class ComandaIT implements Serializable {
 	@Setter
 	private ComandaITStatusEnum status;
 
-//	public Double getTotalvl() {
-//		totalvl=this.qtd*this.unitariovl;
-//		return totalvl;
-//	}
+	public Double getTotalvl() {
+		totalvl=(this.qtd*this.unitariovl);
+		return totalvl;
+	}
 
-	public ComandaIT(Comanda comanda, Prod prod, Double qtd, Double unitariovl, Double desconto, Double totalvl,
-			ComandaITStatusEnum status) {
+	public ComandaIT(Comanda comanda,Integer seq, Prod prod, Double qtd, Double desconto, ComandaITStatusEnum status) {
 		this.id.setComanda(comanda);
 		this.id.setProd(prod);
+		this.seq=seq;
 		this.qtd = qtd;
-		this.unitariovl = unitariovl;
+		this.unitariovl = prod.getPrecovenda();
+		this.totalvl=getTotalvl();
 		this.desconto = desconto;
-		this.totalvl = totalvl;
 		this.status = status;
 	}
 	
-	public ComandaIT(ComandaITNewDTO dto) {
+	public ComandaIT(ComandaITNewDTO dto, Comanda comanda) {
 		Prod prod=new Prod();
 		prod.setId(dto.getProdid());
 		ComandaITPK id=new ComandaITPK();
 		id.setProd(prod);
+		id.setComanda(comanda);
 		this.id=id;
 		this.seq=dto.getSeq();
 		this.qtd=dto.getQtd();
+		this.desconto=dto.getDesconto();
 		this.unitariovl=dto.getUnitariovl();
-		this.totalvl=dto.getTotalvl();
+		this.totalvl=getTotalvl();
+		this.status=ComandaITStatusEnum.Ativo;
+//		this.totalvl=dto.getTotalvl();
 		//this.status=ComandaITStatusEnum.toEnum(dto.getStatus().getId());
 	}
 
@@ -96,7 +100,8 @@ public class ComandaIT implements Serializable {
 		this.seq=dto.getSeq();
 		this.qtd=dto.getQtd();
 		this.unitariovl=dto.getUnitariovl();
-		this.totalvl=dto.getTotalvl();
+		this.totalvl=getTotalvl();
+		// this.totalvl=dto.getTotalvl();
 		//this.status=ComandaITStatusEnum.toEnum(dto.getStatus().getId());
 	}
 

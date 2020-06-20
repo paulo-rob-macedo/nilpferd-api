@@ -15,7 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 
 import com.denkenvoncode.nilpferdapi.domain.enums.ComandaStatusEnum;
 import com.denkenvoncode.nilpferdapi.dto.ComandaNewDTO;
@@ -50,14 +49,22 @@ public class Comanda implements Serializable {
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	@Getter
 	@Setter
+	@NonNull
 	private Date dtabertura;
 	
 	@Column(name="dtfechamento")
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	@Getter
 	@Setter
-	@NonNull
 	private Date dtfechamento;
+	
+	@Column(name="descontovl")
+	@NonNull
+	private Double descontovl;	
+
+	@Column(name="totalvl")
+	@NonNull
+	private Double totalvl;	
 	
 	@Column(name="status")
 	@Getter
@@ -67,13 +74,13 @@ public class Comanda implements Serializable {
 	
 	@OneToOne
 	@JoinColumn(name = "usuarioid", referencedColumnName = "id")
-	@NotBlank(message = "Defina o codigo do usuario!")
+//	@NotBlank(message = "Defina o codigo do usuario!")
 	@Getter
 	@Setter
 	@NonNull
 	private Usuario usuario;
 	
-	@OneToMany(mappedBy="id.comanda")	
+	@OneToMany(mappedBy="id.comanda",cascade=CascadeType.ALL)	
 	@Getter
 	@Setter
 	private List<ComandaIT> itens=new ArrayList<ComandaIT>();
@@ -82,6 +89,21 @@ public class Comanda implements Serializable {
 	@Getter
 	@Setter
 	private List<ComandaPagto> pagtos = new ArrayList<>();
+	
+	
+	public Double getDescontovl() {
+		this.descontovl=getItens().stream()
+				.mapToDouble(x -> x.getDesconto())
+				.sum();
+		return this.descontovl;
+	}
+	
+	public Double getTotalvl() {
+		this.totalvl=getItens().stream()
+				.mapToDouble(x->x.getTotalvl())
+				.sum();
+		return this.totalvl;
+	}
 	
 	public Comanda(ComandaNewDTO dto) {
 //		Usuario usuario=new Usuario();
@@ -97,5 +119,6 @@ public class Comanda implements Serializable {
 		this.status=ComandaStatusEnum.toEnum(dto.getStatusid());
 		//this.usuario.setId(dto.getUsuarioid());
 	}
+
 
 }
