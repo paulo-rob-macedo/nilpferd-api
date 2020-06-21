@@ -1,6 +1,7 @@
 package com.denkenvoncode.nilpferdapi.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -9,10 +10,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
 @Data
+@NoArgsConstructor
 public class ComandaUpdDTO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -42,5 +45,10 @@ public class ComandaUpdDTO implements Serializable {
 	
 	@Getter
 	@Setter
-	private List<ComandaITUpdDTO> itens;	
+	private List<ComandaITDTO> itens = new ArrayList<ComandaITDTO>();
+	
+	@Getter
+	@Setter
+	private List<ComandaPagtoDTO> pags = new ArrayList<ComandaPagtoDTO>();
+	
 }

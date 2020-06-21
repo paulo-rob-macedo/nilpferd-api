@@ -44,6 +44,8 @@ public class ComandaPagto implements Serializable{
 	@ManyToOne
 	@JoinColumn(name="comandaid")
 	@NonNull
+	@Getter
+	@Setter
 	private Comanda comanda;
 	
 	@Column(name="dtpagto")

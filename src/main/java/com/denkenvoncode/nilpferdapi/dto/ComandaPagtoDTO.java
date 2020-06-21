@@ -10,10 +10,12 @@ import com.denkenvoncode.nilpferdapi.domain.ComandaPagto;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
 
 @Data
+@NoArgsConstructor
 public class ComandaPagtoDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -45,14 +47,15 @@ public class ComandaPagtoDTO implements Serializable {
 
 	@Getter
 	@Setter
-	private ComandaPagtoTipoDTO tipo;
+	private ComandaPagtoTipoDTO tipo=new ComandaPagtoTipoDTO();
 
 	@Getter
 	@Setter
-	private ComandaPagtoStatusDTO status;
+	private ComandaPagtoStatusDTO status=new ComandaPagtoStatusDTO();
 
 	public ComandaPagtoDTO(ComandaPagto pagto) {
 		this.id=pagto.getId();
+		this.comandaid = pagto.getComanda().getId();
 		this.dtpagto=pagto.getDtpagto();
 		this.pagtovl=pagto.getPagtovl();
 		this.qtdparcela=pagto.getQtdparcela();

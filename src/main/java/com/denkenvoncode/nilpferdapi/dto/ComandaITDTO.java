@@ -6,9 +6,11 @@ import com.denkenvoncode.nilpferdapi.domain.ComandaIT;
 
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Data
+@NoArgsConstructor
 public class ComandaITDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -19,7 +21,7 @@ public class ComandaITDTO implements Serializable {
 
 	@Getter
 	@Setter
-	private ComandaProdDTO prod;
+	private ComandaProdDTO prod = new ComandaProdDTO();
 
 	@Getter
 	@Setter
@@ -43,7 +45,7 @@ public class ComandaITDTO implements Serializable {
 
 	@Getter
 	@Setter
-	private ComandaITStatusDTO status;
+	private ComandaITStatusDTO status=new ComandaITStatusDTO();
 
 	public ComandaITDTO(ComandaIT comandaIT) {
 
@@ -62,5 +64,5 @@ public class ComandaITDTO implements Serializable {
 		this.status.setDescr(comandaIT.getStatus().getDescr());
 
 	}
-	
+
 }

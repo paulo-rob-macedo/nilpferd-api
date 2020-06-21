@@ -7,9 +7,11 @@ import com.denkenvoncode.nilpferdapi.domain.Prod;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Data
+@NoArgsConstructor
 public class ComandaProdDTO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

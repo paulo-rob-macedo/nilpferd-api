@@ -1,5 +1,6 @@
 package com.denkenvoncode.nilpferdapi.services;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -8,6 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.denkenvoncode.nilpferdapi.domain.Cliente;
 import com.denkenvoncode.nilpferdapi.domain.Comanda;
 import com.denkenvoncode.nilpferdapi.domain.ComandaIT;
 import com.denkenvoncode.nilpferdapi.domain.Usuario;
@@ -27,6 +29,10 @@ public class ComandaService {
 	@Autowired
 	UsuarioRepository usuarioRepository;
 	
+	public List<Comanda> findAll(){
+		return repository.findAll();
+	}
+		
 	public Comanda findbyId(Long id) {
 		Optional<Comanda> comanda = repository.findById(id);
 		return comanda.orElseThrow(() -> new ObjectNotFoundException(

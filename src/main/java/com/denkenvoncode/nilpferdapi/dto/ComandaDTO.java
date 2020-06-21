@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.denkenvoncode.nilpferdapi.domain.Comanda;
+import com.denkenvoncode.nilpferdapi.domain.ComandaIT;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
@@ -37,19 +38,19 @@ public class ComandaDTO implements Serializable {
 	
 	@Getter
 	@Setter
-	private ComandaUsuarioDTO usuario;
+	private ComandaUsuarioDTO usuario=new ComandaUsuarioDTO();
 	
 	@Getter
 	@Setter
-	private ComandaStatusDTO status;
+	private ComandaStatusDTO status=new ComandaStatusDTO();
 	
 	@Getter
 	@Setter
-	private List<ComandaITDTO> itens;
+	private List<ComandaITDTO> itens = new ArrayList<ComandaITDTO>();
 	
 	@Getter
 	@Setter
-	private List<ComandaPagtoDTO> pags;
+	private List<ComandaPagtoDTO> pags = new ArrayList<ComandaPagtoDTO>();
 	
 	public ComandaDTO(Comanda comanda) {
 		
