@@ -45,10 +45,10 @@ public class ComandaUpdDTO implements Serializable {
 	
 	@Getter
 	@Setter
-	private List<ComandaITDTO> itens = new ArrayList<ComandaITDTO>();
+	private List<ComandaITUpdDTO> itens = new ArrayList<ComandaITUpdDTO>();
 	
 	@Getter
 	@Setter
-	private List<ComandaPagtoDTO> pags = new ArrayList<ComandaPagtoDTO>();
+	private List<ComandaPagtoUpdDTO> pags = new ArrayList<ComandaPagtoUpdDTO>();
 	
 }

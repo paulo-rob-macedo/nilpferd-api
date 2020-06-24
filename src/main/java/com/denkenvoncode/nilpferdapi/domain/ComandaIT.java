@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import com.denkenvoncode.nilpferdapi.domain.enums.ComandaITStatusEnum;
+import com.denkenvoncode.nilpferdapi.dto.ComandaITDTO;
 import com.denkenvoncode.nilpferdapi.dto.ComandaITNewDTO;
 import com.denkenvoncode.nilpferdapi.dto.ComandaITUpdDTO;
 
@@ -76,7 +77,21 @@ public class ComandaIT implements Serializable {
 		this.status = status;
 	}
 	
-	public ComandaIT(ComandaITNewDTO dto, Comanda comanda) {
+	public ComandaIT(ComandaITDTO dto) {
+		ComandaITPK id=new ComandaITPK();
+		id.getComanda().setId(dto.getComandaid());
+		id.getProd().setId(dto.getProd().getId());
+		this.seq=dto.getSeq();
+		this.qtd=dto.getQtd();
+		this.unitariovl=dto.getUnitariovl();
+		this.desconto=dto.getDesconto();
+		this.totalvl=getTotalvl();
+		this.status=ComandaITStatusEnum.toEnum(dto.getStatus().getId());
+	}
+	
+	public ComandaIT(ComandaITNewDTO dto) {
+		Comanda comanda=new Comanda();
+		comanda.setId(dto.getComandaid());
 		Prod prod=new Prod();
 		prod.setId(dto.getProdid());
 		ComandaITPK id=new ComandaITPK();
@@ -89,8 +104,6 @@ public class ComandaIT implements Serializable {
 		this.unitariovl=dto.getUnitariovl();
 		this.totalvl=getTotalvl();
 		this.status=ComandaITStatusEnum.Ativo;
-//		this.totalvl=dto.getTotalvl();
-		//this.status=ComandaITStatusEnum.toEnum(dto.getStatus().getId());
 	}
 
 	public ComandaIT(ComandaITUpdDTO dto) {
@@ -101,8 +114,6 @@ public class ComandaIT implements Serializable {
 		this.qtd=dto.getQtd();
 		this.unitariovl=dto.getUnitariovl();
 		this.totalvl=getTotalvl();
-		// this.totalvl=dto.getTotalvl();
-		//this.status=ComandaITStatusEnum.toEnum(dto.getStatus().getId());
 	}
 
 	public Comanda getComanda() {

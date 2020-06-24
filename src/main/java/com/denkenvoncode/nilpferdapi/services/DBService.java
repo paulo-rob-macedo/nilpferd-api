@@ -135,7 +135,11 @@ public class DBService {
 		comanda1.getDescontovl();
 		comanda1.getTotalvl();
 		
-		ComandaPagto comandaPagto1=new ComandaPagto(comanda1,new Date(),40.0,40.0,1,ComandaPagtoTipoEnum.Debito,ComandoPagtoStatusEnum.Ativo);
+		ComandaPagto comandaPagto1=new ComandaPagto(comanda1,new Date(),40.0,1,ComandaPagtoTipoEnum.Debito,ComandoPagtoStatusEnum.Ativo);
+		comandaPagto1.setDtpagto(new Date());
+		comandaPagto1.setPagtovl(comandaPagto1.getVencvl());
+		comandaPagto1.setRecebidovl(comandaPagto1.getVencvl());
+		comandaPagto1.setTrocovl(comandaPagto1.getRecebidovl()-comandaPagto1.getPagtovl());
 		comanda1.getPagtos().add(comandaPagto1);
 		
 		comandaRepository.save(comanda1);

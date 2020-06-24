@@ -9,9 +9,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.denkenvoncode.nilpferdapi.domain.Cliente;
 import com.denkenvoncode.nilpferdapi.domain.Comanda;
 import com.denkenvoncode.nilpferdapi.domain.ComandaIT;
+import com.denkenvoncode.nilpferdapi.domain.ComandaPagto;
 import com.denkenvoncode.nilpferdapi.domain.Usuario;
 import com.denkenvoncode.nilpferdapi.dto.ComandaNewDTO;
 import com.denkenvoncode.nilpferdapi.dto.ComandaUpdDTO;
@@ -63,7 +63,7 @@ public class ComandaService {
 		Optional<Usuario> usuario=usuarioRepository.findById(dto.getUsuarioid());
 		Comanda comanda=new Comanda(dto);
 		comanda.setUsuario(usuario.get());
-		comanda.getItens().addAll(dto.getItens().stream().map(obj -> new ComandaIT(obj,comanda)).collect(Collectors.toList()));
+		comanda.getItens().addAll(dto.getItens().stream().map(obj -> new ComandaIT(obj)).collect(Collectors.toList()));
 		return comanda;
 	}
 	
@@ -71,6 +71,7 @@ public class ComandaService {
 		//Usuario usuario=usuarioRepository.getOne(dto.getUsuarioid());
 		Comanda comanda=new Comanda(dto);
 		comanda.getItens().addAll(dto.getItens().stream().map(obj -> new ComandaIT(obj)).collect(Collectors.toList()));
-		return comanda;		
+		comanda.getPagtos().addAll(dto.getPags().stream().map(obj-> new ComandaPagto(obj)).collect(Collectors.toList()));
+		return comanda;
 	}
 }

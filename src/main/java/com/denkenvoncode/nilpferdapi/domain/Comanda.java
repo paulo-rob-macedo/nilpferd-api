@@ -115,8 +115,11 @@ public class Comanda implements Serializable {
 	}
 	
 	public Comanda(ComandaUpdDTO dto) {
-		this.dtabertura=dto.getDtabertura();
-		this.status=ComandaStatusEnum.toEnum(dto.getStatusid());
+		Usuario usuario=new Usuario();
+		usuario.setId(dto.getUsuarioid());
+		this.setDtabertura(dto.getDtabertura());
+		this.setStatus(ComandaStatusEnum.toEnum(dto.getStatusid()));
+		this.setUsuario(usuario);
 		//this.usuario.setId(dto.getUsuarioid());
 	}
 
