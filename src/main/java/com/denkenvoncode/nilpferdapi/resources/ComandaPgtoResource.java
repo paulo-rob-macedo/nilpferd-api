@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.denkenvoncode.nilpferdapi.domain.Cliente;
 import com.denkenvoncode.nilpferdapi.domain.ComandaPagto;
-import com.denkenvoncode.nilpferdapi.dto.ClienteUpdDTO;
 import com.denkenvoncode.nilpferdapi.dto.ComandaPagtoDTO;
 import com.denkenvoncode.nilpferdapi.dto.ComandaPagtoNewDTO;
+import com.denkenvoncode.nilpferdapi.dto.ComandaPagtoUpdDTO;
 import com.denkenvoncode.nilpferdapi.services.ComandaPagtoService;
 
 @RestController
