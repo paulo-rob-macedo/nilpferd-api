@@ -19,6 +19,7 @@ public class ComandaPagtoService {
 	@Autowired
 	ComandaPagtoRepository repository;
 	
+	
 	public ComandaPagto findbyId(Long id) {
 		Optional<ComandaPagto> pagto = repository.findById(id);
 		return pagto.orElseThrow(() -> new ObjectNotFoundException(

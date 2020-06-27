@@ -73,6 +73,7 @@ public class ComandaPagtoDTO implements Serializable {
 		this.vencvl=pagto.getVencvl();
 		this.dtpagto=pagto.getDtpagto();
 		this.pagtovl=pagto.getPagtovl();
+		this.recebidovl=pagto.getRecebidovl();
 		this.trocovl=pagto.getTrocovl();
 		this.qtdparcela=pagto.getQtdparcela();
 		this.tipo.setId(pagto.getTipo().getCod());

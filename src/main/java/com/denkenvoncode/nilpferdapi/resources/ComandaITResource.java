@@ -21,6 +21,7 @@ import com.denkenvoncode.nilpferdapi.dto.ComandaITDTO;
 import com.denkenvoncode.nilpferdapi.dto.ComandaITNewDTO;
 import com.denkenvoncode.nilpferdapi.dto.ComandaITUpdDTO;
 import com.denkenvoncode.nilpferdapi.services.ComandaITService;
+import com.denkenvoncode.nilpferdapi.services.ProdService;
 
 
 @RestController
@@ -30,13 +31,17 @@ public class ComandaITResource {
 	@Autowired
 	ComandaITService service;
 	
+	@Autowired
+	ProdService prodService;
+	
 	@RequestMapping(value = "/{comandaid}/{prodid}", method = RequestMethod.GET)
 	public ResponseEntity<ComandaITDTO> find(@PathVariable Long comandaid, @PathVariable Long prodid) {
 		
 		Comanda comanda=new Comanda();
 		comanda.setId(comandaid);
-		Prod prod=new Prod();
-		prod.setId(prodid);
+		Prod prod=prodService.findbyId(prodid);
+		//Prod prod=new Prod();
+		//prod.setId(prodid);
 		
 		ComandaITPK comandaITPK=new ComandaITPK();
 		comandaITPK.setComanda(comanda);

@@ -29,6 +29,7 @@ public class ComandaITService {
 				+" , classe :"+ComandaIT.class.getName()));
 	}
 	
+
 	@Transactional
 	public ComandaIT insert(ComandaIT comandaIT) {
 		comandaIT = repository.save(comandaIT);
@@ -47,5 +48,7 @@ public class ComandaITService {
 			throw new DataIntegrityException("Não é possível excluir ite, pois ha comanda relacionados!");
 		}
 	}	
+	
+	
 	
 }

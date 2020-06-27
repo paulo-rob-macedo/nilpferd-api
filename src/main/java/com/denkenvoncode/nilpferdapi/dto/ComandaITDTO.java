@@ -49,6 +49,7 @@ public class ComandaITDTO implements Serializable {
 
 	public ComandaITDTO(ComandaIT comandaIT) {
 
+		
 		UnidDTO unidVenda = new UnidDTO(comandaIT.getProd().getUnidvenda());
 
 		this.comandaid = comandaIT.getComanda().getId();

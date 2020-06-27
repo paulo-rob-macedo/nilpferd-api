@@ -1,14 +1,14 @@
 package com.denkenvoncode.nilpferdapi.repositories;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Repository;
 
 import com.denkenvoncode.nilpferdapi.domain.ComandaPagto;
 
+@Repository
 public interface ComandaPagtoRepository extends JpaRepository<ComandaPagto, Long>{
 
-	@Transactional(readOnly=true)
-	public List<ComandaPagto> findbyComandaid(Long comandaid);
+//	@Query("select p from ComandaPagto p where p.comandaid=:comandaid")
+//	public Optional<ComandaPagto>  ListAllComanda(@Param("comandaid") Long comandaid);
+	
 }

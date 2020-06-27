@@ -52,9 +52,6 @@ public class DBService {
 	private ComandaRepository comandaRepository;
 	
 	@Autowired
-	private ComandaITRepository comandaITRepository;
-	
-	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;	
 	
 	public void StagingInitialize() {
@@ -144,7 +141,6 @@ public class DBService {
 		
 		comandaRepository.save(comanda1);
 		
-		//comandaITRepository.saveAll(comanda1.getItens());
 		
 	}
 	
